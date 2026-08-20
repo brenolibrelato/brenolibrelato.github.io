@@ -14,158 +14,142 @@
 </head>
 <body>
 
-  <!-- ===================== NAVEGAÇÃO ===================== -->
-  <header class="header">
-    <nav class="nav container">
-      <a href="#top" class="logo">Seu Nome</a>
+  <div class="page">
 
-      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
-        <span></span><span></span><span></span>
-      </button>
+    <!-- ============================================================
+         COLUNA DE CONTEÚDO (2/3 da tela)
+         As 4 seções abaixo funcionam como "abas": só uma fica visível
+         por vez, trocada pelo script.js sem recarregar nem rolar a
+         página. Isso é o que garante a página única sem scroll.
+         ============================================================ -->
+    <div class="content-col">
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#projetos">Projetos</a></li>
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#contato">Contato</a></li>
-        <li><a href="assets/curriculo.pdf" class="btn btn-small" target="_blank">Currículo</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- ===================== HERO / HOME ===================== -->
-  <section class="hero" id="top">
-    <div class="container hero-content">
-      <p class="eyebrow">Olá, eu sou</p>
-      <h1>Seu Nome</h1>
-      <h2>Estudante de [seu curso] buscando estágio em [área de interesse]</h2>
-      <p class="hero-text">
-        Escreva aqui 2 a 3 frases sobre quem você é, o que você estuda e o
-        tipo de trabalho ou estágio que está buscando. Fale também de algum
-        diferencial: uma ferramenta que domina, um projeto que se orgulha,
-        ou uma paixão relacionada à área.
-      </p>
-      <div class="hero-actions">
-        <a href="#projetos" class="btn btn-primary">Ver projetos</a>
-        <a href="#contato" class="btn btn-outline">Entrar em contato</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PROJETOS ===================== -->
-  <section class="projects" id="projetos">
-    <div class="container">
-      <h2 class="section-title">Projetos</h2>
-      <p class="section-subtitle">Uma seleção dos trabalhos que mais representam o que eu sei fazer.</p>
-
-      <div class="project-grid">
-
-        <!-- Card 1: Projeto de código -->
-        <article class="project-card">
-          <div class="project-image">
-            <!-- Troque por uma imagem/print real em assets/projeto1.jpg -->
-            <img src="https://placehold.co/600x400?text=Projeto+de+C%C3%B3digo" alt="Print do projeto de código">
-          </div>
-          <div class="project-body">
-            <span class="tag">Código</span>
-            <h3>Nome do Projeto</h3>
-            <p>Descreva em 2-3 frases o problema que o projeto resolve, as
-              tecnologias usadas e o resultado alcançado.</p>
-            <div class="project-links">
-              <a href="#" target="_blank">Repositório →</a>
-              <a href="#" target="_blank">Demo →</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 2: Projeto acadêmico -->
-        <article class="project-card">
-          <div class="project-image">
-            <img src="https://placehold.co/600x400?text=Trabalho+Acad%C3%AAmico" alt="Capa do trabalho acadêmico">
-          </div>
-          <div class="project-body">
-            <span class="tag">Acadêmico</span>
-            <h3>Nome do Trabalho</h3>
-            <p>Descreva o tema, sua contribuição específica e o que esse
-              trabalho demonstra sobre sua forma de pensar ou pesquisar.</p>
-            <div class="project-links">
-              <a href="#" target="_blank">Ver PDF →</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 3: Projeto de design -->
-        <article class="project-card">
-          <div class="project-image">
-            <img src="https://placehold.co/600x400?text=Projeto+de+Design" alt="Peça de design">
-          </div>
-          <div class="project-body">
-            <span class="tag">Design</span>
-            <h3>Nome da Peça</h3>
-            <p>Descreva o briefing, as decisões de design que você tomou
-              e o contexto em que foi usado ou publicado.</p>
-            <div class="project-links">
-              <a href="#" target="_blank">Ver projeto →</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Duplique um <article class="project-card"> acima para adicionar mais projetos -->
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SOBRE ===================== -->
-  <section class="about" id="sobre">
-    <div class="container about-grid">
-      <div class="about-image">
-        <!-- Troque por uma foto sua em assets/foto.jpg -->
-        <img src="https://placehold.co/400x400?text=Sua+Foto" alt="Foto de Seu Nome">
-      </div>
-      <div class="about-text">
-        <h2 class="section-title">Sobre mim</h2>
-        <p>
-          Conte sua trajetória: onde estuda, o que te motivou a escolher
-          essa área, e o que você busca a seguir (estágio, primeiro
-          emprego, etc). Duas ou três parágrafos curtos bastam.
-        </p>
-        <p>
-          Pode incluir também interesses pessoais que mostrem personalidade,
-          desde que relevantes — comunidades que participa, projetos
-          extracurriculares, hackathons, monitorias.
-        </p>
-
-        <h3>Habilidades</h3>
-        <ul class="skills-list">
-          <li>Habilidade 1</li>
-          <li>Habilidade 2</li>
-          <li>Habilidade 3</li>
-          <li>Habilidade 4</li>
-          <li>Habilidade 5</li>
-          <li>Habilidade 6</li>
+      <nav class="tabnav">
+        <span class="logo">Seu Nome</span>
+        <ul class="tabnav-links">
+          <li><button class="tab-btn active" data-tab="home">Home</button></li>
+          <li><button class="tab-btn" data-tab="projetos">Projetos</button></li>
+          <li><button class="tab-btn" data-tab="sobre">Sobre</button></li>
+          <li><button class="tab-btn" data-tab="contato">Contato</button></li>
         </ul>
-      </div>
-    </div>
-  </section>
+      </nav>
 
-  <!-- ===================== CONTATO ===================== -->
-  <section class="contact" id="contato">
-    <div class="container contact-content">
-      <h2 class="section-title">Vamos conversar</h2>
-      <p class="section-subtitle">Estou aberto(a) a oportunidades de estágio e projetos. Entre em contato:</p>
-      <div class="contact-links">
-        <a href="mailto:seuemail@exemplo.com" class="btn btn-primary">seuemail@exemplo.com</a>
-        <a href="https://linkedin.com/in/seu-usuario" target="_blank" class="btn btn-outline">LinkedIn</a>
-        <a href="https://github.com/seu-usuario" target="_blank" class="btn btn-outline">GitHub</a>
-      </div>
-    </div>
-  </section>
+      <div class="tab-panels">
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; <span id="year"></span> Seu Nome. Feito com HTML e CSS.</p>
+        <!-- ===== HOME ===== -->
+        <section class="tab-panel active" id="home">
+          <p class="eyebrow">Olá, eu sou</p>
+          <h1>Seu Nome</h1>
+          <h2>Estudante de [seu curso] buscando estágio em [área de interesse]</h2>
+          <p class="panel-text">
+            Escreva aqui 2 a 3 frases sobre quem você é, o que você estuda e o
+            tipo de trabalho ou estágio que está buscando. Fale também de algum
+            diferencial: uma ferramenta que domina, um projeto que se orgulha,
+            ou uma paixão relacionada à área.
+          </p>
+          <div class="panel-actions">
+            <button class="btn btn-primary" data-tab-link="projetos">Ver projetos</button>
+            <button class="btn btn-outline" data-tab-link="contato">Entrar em contato</button>
+          </div>
+        </section>
+
+        <!-- ===== PROJETOS ===== -->
+        <section class="tab-panel" id="projetos">
+          <h2 class="section-title">Projetos</h2>
+          <p class="panel-subtitle">Uma seleção dos trabalhos que mais representam o que eu sei fazer.</p>
+
+          <div class="project-grid">
+
+            <article class="project-card">
+              <span class="tag">Código</span>
+              <h3>Nome do Projeto</h3>
+              <p>Descreva em 2-3 frases o problema que o projeto resolve, as
+                tecnologias usadas e o resultado alcançado.</p>
+              <div class="project-links">
+                <a href="#" target="_blank">Repositório →</a>
+                <a href="#" target="_blank">Demo →</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <span class="tag">Acadêmico</span>
+              <h3>Nome do Trabalho</h3>
+              <p>Descreva o tema, sua contribuição específica e o que esse
+                trabalho demonstra sobre sua forma de pensar ou pesquisar.</p>
+              <div class="project-links">
+                <a href="#" target="_blank">Ver PDF →</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <span class="tag">Design</span>
+              <h3>Nome da Peça</h3>
+              <p>Descreva o briefing, as decisões de design que você tomou
+                e o contexto em que foi usado ou publicado.</p>
+              <div class="project-links">
+                <a href="#" target="_blank">Ver projeto →</a>
+              </div>
+            </article>
+
+            <!-- Duplique um <article class="project-card"> acima para adicionar mais projetos -->
+
+          </div>
+        </section>
+
+        <!-- ===== SOBRE ===== -->
+        <section class="tab-panel" id="sobre">
+          <h2 class="section-title">Sobre mim</h2>
+          <p class="panel-text">
+            Conte sua trajetória: onde estuda, o que te motivou a escolher
+            essa área, e o que você busca a seguir (estágio, primeiro
+            emprego, etc). Duas ou três frases curtas bastam.
+          </p>
+          <p class="panel-text">
+            Pode incluir também interesses pessoais que mostrem personalidade,
+            desde que relevantes — comunidades que participa, projetos
+            extracurriculares, hackathons, monitorias.
+          </p>
+
+          <h3 class="sub-heading">Habilidades</h3>
+          <ul class="skills-list">
+            <li>Habilidade 1</li>
+            <li>Habilidade 2</li>
+            <li>Habilidade 3</li>
+            <li>Habilidade 4</li>
+            <li>Habilidade 5</li>
+            <li>Habilidade 6</li>
+          </ul>
+        </section>
+
+        <!-- ===== CONTATO ===== -->
+        <section class="tab-panel" id="contato">
+          <h2 class="section-title">Vamos conversar</h2>
+          <p class="panel-subtitle">Estou aberto(a) a oportunidades de estágio e projetos. Entre em contato:</p>
+          <div class="contact-links">
+            <a href="mailto:seuemail@exemplo.com" class="btn btn-primary">seuemail@exemplo.com</a>
+            <a href="https://linkedin.com/in/seu-usuario" target="_blank" class="btn btn-outline">LinkedIn</a>
+            <a href="https://github.com/seu-usuario" target="_blank" class="btn btn-outline">GitHub</a>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="footer">
+        <p>&copy; <span id="year"></span> Seu Nome</p>
+      </footer>
     </div>
-  </footer>
+
+    <!-- ============================================================
+         COLUNA DE TECLAS (1/3 da tela)
+         Teclas espalhadas aleatoriamente pelo script.js, sem seguir
+         grade nem ordem. A cada meio segundo uma tecla aleatória
+         "é pressionada" (efeito visual). Não depende de nenhum arquivo.
+         ============================================================ -->
+    <div class="keys-col">
+      <div class="keys-field" id="keysField"></div>
+    </div>
+
+  </div>
 
   <script src="script.js"></script>
 </body>
