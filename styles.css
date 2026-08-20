@@ -74,6 +74,35 @@ html, body {
   overflow-y: auto;
 }
 
+/* Thin, dark scrollbar for any scrolling area, so it matches the
+   design instead of showing the browser's default white/gray bar. */
+.content-col,
+.project-grid {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--color-border) transparent; /* Firefox */
+}
+
+.content-col::-webkit-scrollbar,
+.project-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content-col::-webkit-scrollbar-track,
+.project-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content-col::-webkit-scrollbar-thumb,
+.project-grid::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 999px;
+}
+
+.content-col::-webkit-scrollbar-thumb:hover,
+.project-grid::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
 .keys-col {
   width: 33.333%;
   position: relative;
