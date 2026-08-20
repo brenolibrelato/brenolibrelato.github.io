@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seu Nome — Portfólio</title>
-  <meta name="description" content="Portfólio de Seu Nome — projetos acadêmicos, código e design.">
+  <title>Breno Librelato Manoel</title>
+  <meta name="description" content="Portfolio of Breno Librelato Manoel — academic, coding, and design projects.">
 
-  <!-- Fonte do Google Fonts. Troque por outra em fonts.google.com se quiser -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -16,21 +15,15 @@
 
   <div class="page">
 
-    <!-- ============================================================
-         COLUNA DE CONTEÚDO (2/3 da tela)
-         As 4 seções abaixo funcionam como "abas": só uma fica visível
-         por vez, trocada pelo script.js sem recarregar nem rolar a
-         página. Isso é o que garante a página única sem scroll.
-         ============================================================ -->
     <div class="content-col">
 
+      <!-- Splits the site into tabs, so the user never needs to scroll — just switch between tabs -->
       <nav class="tabnav">
-        <span class="logo">Seu Nome</span>
         <ul class="tabnav-links">
           <li><button class="tab-btn active" data-tab="home">Home</button></li>
-          <li><button class="tab-btn" data-tab="projetos">Projetos</button></li>
-          <li><button class="tab-btn" data-tab="sobre">Sobre</button></li>
-          <li><button class="tab-btn" data-tab="contato">Contato</button></li>
+          <li><button class="tab-btn" data-tab="projects">Projects</button></li>
+          <li><button class="tab-btn" data-tab="about">About</button></li>
+          <li><button class="tab-btn" data-tab="contact">Contact</button></li>
         </ul>
       </nav>
 
@@ -38,112 +31,108 @@
 
         <!-- ===== HOME ===== -->
         <section class="tab-panel active" id="home">
-          <p class="eyebrow">Olá, eu sou</p>
-          <h1>Seu Nome</h1>
-          <h2>Estudante de [seu curso] buscando estágio em [área de interesse]</h2>
+          <p class="eyebrow">Hi, I'm</p>
+          <h1>Breno Librelato Manoel</h1>
+          <h2>Information Systems Student</h2>
           <p class="panel-text">
-            Escreva aqui 2 a 3 frases sobre quem você é, o que você estuda e o
-            tipo de trabalho ou estágio que está buscando. Fale também de algum
-            diferencial: uma ferramenta que domina, um projeto que se orgulha,
-            ou uma paixão relacionada à área.
+            Write 2-3 sentences here about who you are, what you study, and the
+            kind of job or internship you're looking for. Mention something that
+            sets you apart too: a tool you're skilled with, a project you're
+            proud of, or a passion related to the field.
           </p>
-          <div class="panel-actions">
-            <button class="btn btn-primary" data-tab-link="projetos">Ver projetos</button>
-            <button class="btn btn-outline" data-tab-link="contato">Entrar em contato</button>
-          </div>
         </section>
 
-        <!-- ===== PROJETOS ===== -->
-        <section class="tab-panel" id="projetos">
-          <h2 class="section-title">Projetos</h2>
-          <p class="panel-subtitle">Uma seleção dos trabalhos que mais representam o que eu sei fazer.</p>
+        <!-- ===== PROJECTS ===== -->
+        <section class="tab-panel" id="projects">
+          <h2 class="section-title">Projects</h2>
+          <p class="panel-subtitle">A selection of the work that best represents what I can do.</p>
 
           <div class="project-grid">
 
             <article class="project-card">
-              <span class="tag">Código</span>
-              <h3>Nome do Projeto</h3>
-              <p>Descreva em 2-3 frases o problema que o projeto resolve, as
-                tecnologias usadas e o resultado alcançado.</p>
+              <span class="tag">Code</span>
+              <h3>Project Name</h3>
+              <p>Describe in 2-3 sentences the problem the project solves, the
+                technologies used, and the result achieved.</p>
               <div class="project-links">
-                <a href="#" target="_blank">Repositório →</a>
+                <a href="#" target="_blank">Repository →</a>
                 <a href="#" target="_blank">Demo →</a>
               </div>
             </article>
 
             <article class="project-card">
-              <span class="tag">Acadêmico</span>
-              <h3>Nome do Trabalho</h3>
-              <p>Descreva o tema, sua contribuição específica e o que esse
-                trabalho demonstra sobre sua forma de pensar ou pesquisar.</p>
+              <span class="tag">Academic</span>
+              <h3>Assignment Title</h3>
+              <p>Describe the topic, your specific contribution, and what this
+                work demonstrates about how you think or research.</p>
               <div class="project-links">
-                <a href="#" target="_blank">Ver PDF →</a>
+                <a href="#" target="_blank">View PDF →</a>
               </div>
             </article>
 
             <article class="project-card">
               <span class="tag">Design</span>
-              <h3>Nome da Peça</h3>
-              <p>Descreva o briefing, as decisões de design que você tomou
-                e o contexto em que foi usado ou publicado.</p>
+              <h3>Piece Name</h3>
+              <p>Describe the brief, the design decisions you made, and the
+                context where it was used or published.</p>
               <div class="project-links">
-                <a href="#" target="_blank">Ver projeto →</a>
+                <a href="#" target="_blank">View project →</a>
               </div>
             </article>
 
-            <!-- Duplique um <article class="project-card"> acima para adicionar mais projetos -->
+            <!-- Duplicate an <article class="project-card"> above to add more projects -->
 
           </div>
         </section>
 
-        <!-- ===== SOBRE ===== -->
-        <section class="tab-panel" id="sobre">
-          <h2 class="section-title">Sobre mim</h2>
+        <!-- ===== ABOUT ===== -->
+        <section class="tab-panel" id="about">
+          <h2 class="section-title">About me</h2>
           <p class="panel-text">
-            Conte sua trajetória: onde estuda, o que te motivou a escolher
-            essa área, e o que você busca a seguir (estágio, primeiro
-            emprego, etc). Duas ou três frases curtas bastam.
+            Tell your story: where you study, what motivated you to choose
+            this field, and what you're looking for next (internship, first
+            job, etc). Two or three short sentences are enough.
           </p>
           <p class="panel-text">
-            Pode incluir também interesses pessoais que mostrem personalidade,
-            desde que relevantes — comunidades que participa, projetos
-            extracurriculares, hackathons, monitorias.
+            You can also include personal interests that show personality,
+            as long as they're relevant — communities you're part of,
+            extracurricular projects, hackathons, teaching assistantships.
           </p>
 
-          <h3 class="sub-heading">Habilidades</h3>
+          <h3 class="sub-heading">Skills</h3>
           <ul class="skills-list">
-            <li>Habilidade 1</li>
-            <li>Habilidade 2</li>
-            <li>Habilidade 3</li>
-            <li>Habilidade 4</li>
-            <li>Habilidade 5</li>
-            <li>Habilidade 6</li>
+            <li>Skill 1</li>
+            <li>Skill 2</li>
+            <li>Skill 3</li>
+            <li>Skill 4</li>
+            <li>Skill 5</li>
+            <li>Skill 6</li>
           </ul>
         </section>
 
-        <!-- ===== CONTATO ===== -->
-        <section class="tab-panel" id="contato">
-          <h2 class="section-title">Vamos conversar</h2>
-          <p class="panel-subtitle">Estou aberto(a) a oportunidades de estágio e projetos. Entre em contato:</p>
+        <!-- ===== CONTACT ===== -->
+        <section class="tab-panel" id="contact">
+          <h2 class="section-title">Let's talk</h2>
+          <p class="panel-subtitle">I'm open to internship opportunities and projects. Get in touch:</p>
           <div class="contact-links">
-            <a href="mailto:seuemail@exemplo.com" class="btn btn-primary">seuemail@exemplo.com</a>
-            <a href="https://linkedin.com/in/seu-usuario" target="_blank" class="btn btn-outline">LinkedIn</a>
-            <a href="https://github.com/seu-usuario" target="_blank" class="btn btn-outline">GitHub</a>
+            <a href="mailto:youremail@example.com" class="btn btn-primary">youremail@example.com</a>
+            <a href="https://linkedin.com/in/your-username" target="_blank" class="btn btn-outline">LinkedIn</a>
+            <a href="https://github.com/your-username" target="_blank" class="btn btn-outline">GitHub</a>
           </div>
         </section>
 
       </div>
 
       <footer class="footer">
-        <p>&copy; <span id="year"></span> Seu Nome</p>
+        <p>&copy; <span id="year"></span> Breno Librelato Manoel</p>
       </footer>
     </div>
 
     <!-- ============================================================
-         COLUNA DE TECLAS (1/3 da tela)
-         Teclas espalhadas aleatoriamente pelo script.js, sem seguir
-         grade nem ordem. A cada meio segundo uma tecla aleatória
-         "é pressionada" (efeito visual). Não depende de nenhum arquivo.
+         KEYS COLUMN (1/3 of the screen)
+         Keys are scattered randomly by script.js, with no grid or
+         order. Every 1.5s a random key gets "pressed" (visual effect
+         only). Doesn't depend on any external file.
          ============================================================ -->
     <div class="keys-col">
       <div class="keys-field" id="keysField"></div>

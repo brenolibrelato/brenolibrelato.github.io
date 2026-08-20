@@ -1,5 +1,5 @@
-// Troca de abas: mostra o painel correspondente e esconde os outros,
-// sem recarregar ou rolar a página.
+// Tab switching: shows the matching panel and hides the others,
+// without reloading or scrolling the page.
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabPanels = document.querySelectorAll('.tab-panel');
 const tabLinks = document.querySelectorAll('[data-tab-link]');
@@ -17,18 +17,18 @@ tabButtons.forEach((btn) => {
   btn.addEventListener('click', () => activateTab(btn.dataset.tab));
 });
 
-// Botões dentro dos painéis que também navegam para outra aba
-// (ex: "Ver projetos" na Home leva para a aba Projetos)
+// Buttons inside panels that also navigate to another tab
+// (e.g. "View projects" on Home jumps to the Projects tab)
 tabLinks.forEach((link) => {
   link.addEventListener('click', () => activateTab(link.dataset.tabLink));
 });
 
-// Atualiza o ano no rodapé automaticamente
+// Updates the year in the footer automatically
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // =========================================================
-// CAMPO DE TECLAS: espalha teclas de teclado aleatoriamente
-// pela coluna da direita e "pressiona" uma a cada 1,5s.
+// KEYS FIELD: scatters keyboard keys randomly across the
+// right-hand column and "presses" one every 1.5s.
 // =========================================================
 const KEYS = [
   'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
@@ -51,10 +51,10 @@ function buildKeysField() {
   const field = document.getElementById('keysField');
   if (!field) return [];
 
-  // Divide a área em uma grade "invisível" e depois embaralha tanto a
-  // ordem das teclas quanto as células, aplicando um deslocamento
-  // aleatório (jitter) e uma rotação aleatória em cada uma — o
-  // resultado visual não segue nenhuma grade ou padrão perceptível.
+  // Splits the area into an "invisible" grid, then shuffles both the
+  // order of the keys and the cells, applying a random offset
+  // (jitter) and a random rotation to each — the resulting layout
+  // doesn't follow any perceptible grid or pattern.
   const cols = 5;
   const rows = 10;
   const cells = [];
@@ -77,7 +77,7 @@ function buildKeysField() {
 
     const left = (cell.col + 0.5) * cellWidth + jitterX;
     const top = (cell.row + 0.5) * cellHeight + jitterY;
-    const rotation = (Math.random() - 0.5) * 40; // -20deg a 20deg
+    const rotation = (Math.random() - 0.5) * 40; // -20deg to 20deg
 
     const keyEl = document.createElement('div');
     keyEl.className = 'key' + (label.length > 1 ? ' wide' : '');
