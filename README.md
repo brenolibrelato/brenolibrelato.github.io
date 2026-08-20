@@ -1,4 +1,4 @@
-## Hey there, this is my portfolio 👋
+## Hello, check out more about me 👋
 
 → https://brenolibrelato.github.io/
 
