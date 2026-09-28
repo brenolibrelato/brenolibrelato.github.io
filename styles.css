@@ -8,13 +8,20 @@
   --color-text-muted: #9a9aab;
   --color-primary: #7c5cff;
   --color-primary-hover: #6a47ff;
-  --color-border: #24242f;
+  --color-line: #2a2a36;
 
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --radius: 12px;
-  --content-width-ratio: 2fr;
-  --video-width-ratio: 1fr;
+  /* Type scale: a single weight (400), hierarchy comes from size only */
+  --fs-display: clamp(3rem, 7vw, 7.5rem);
+  --fs-title: clamp(2.25rem, 4.5vw, 4rem);
+  --fs-lead: clamp(1.1rem, 1.5vw, 1.4rem);
+  --fs-body: 0.95rem;
+  --fs-small: 0.8125rem;
+
+  --cell-pad: clamp(20px, 2.2vw, 32px);
+  --radius: 2px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* =========================================================
@@ -26,16 +33,17 @@
   padding: 0;
 }
 
-body {
-  font-family: var(--font-main);
-  color: var(--color-text);
-  background: var(--color-bg);
-  line-height: 1.6;
+html, body {
+  height: 100%;
 }
 
-img, video {
-  max-width: 100%;
-  display: block;
+body {
+  font-family: var(--font-main);
+  font-weight: 400;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -47,178 +55,165 @@ ul {
   list-style: none;
 }
 
+h1, h2, h3, h4 {
+  font-weight: 400;
+}
+
 button {
-  font-family: inherit;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  text-align: left;
   cursor: pointer;
 }
 
-/* =========================================================
-   MAIN LAYOUT — 2/3 content + 1/3 video, no scrolling
-   ========================================================= */
-html, body {
-  height: 100%;
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
 }
 
+/* =========================================================
+   GRID — every row shares the same 4 columns, separated by
+   1px hairlines, so cells line up across the whole page
+   ========================================================= */
 .page {
   display: flex;
+  flex-direction: column;
   height: 100vh;
-  width: 100vw;
   overflow: hidden;
 }
 
-.content-col {
-  width: 66.666%;
+.row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid var(--color-line);
+}
+
+.cell {
+  position: relative;
+  padding: var(--cell-pad);
+  border-right: 1px solid var(--color-line);
+}
+
+.cell:last-child {
+  border-right: none;
+}
+
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: span 3; }
+
+/* Small running number shown at the top of cells (01, 02...) */
+.index {
+  display: block;
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 16px;
+}
+
+.meta {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* ↗ arrow in the top-right corner of clickable blocks */
+.arrow {
+  position: absolute;
+  top: var(--cell-pad);
+  right: var(--cell-pad);
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 0.3s var(--ease);
+}
+
+a:hover .arrow,
+button:hover .arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Solid accent block (Contact, View projects, Email) */
+.cta-block {
   display: flex;
   flex-direction: column;
-  padding: 32px 48px;
-  overflow-y: auto;
-}
-
-/* Thin, dark scrollbar for any scrolling area, so it matches the
-   design instead of showing the browser's default white/gray bar. */
-.content-col,
-.project-grid {
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: var(--color-border) transparent; /* Firefox */
-}
-
-.content-col::-webkit-scrollbar,
-.project-grid::-webkit-scrollbar {
-  width: 6px;
-}
-
-.content-col::-webkit-scrollbar-track,
-.project-grid::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.content-col::-webkit-scrollbar-thumb,
-.project-grid::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 999px;
-}
-
-.content-col::-webkit-scrollbar-thumb:hover,
-.project-grid::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
-}
-
-.keys-col {
-  width: 33.333%;
-  position: relative;
-  background: linear-gradient(160deg, #1a1a26, #0d0d13);
-  overflow: hidden;
-}
-
-.keys-field {
-  position: absolute;
-  inset: 0;
-}
-
-/* Each key is positioned in % (top/left) via JS, which keeps it
-   proportional if the column changes size (e.g. on mobile). */
-.key {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: clamp(34px, 4.2vw, 52px);
-  height: clamp(34px, 4.2vw, 52px);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  color: var(--color-text-muted);
-  font-weight: 700;
-  font-size: clamp(0.7rem, 1vw, 0.9rem);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
-  transition: transform 0.12s ease, background 0.12s ease, color 0.12s ease, box-shadow 0.12s ease;
-  user-select: none;
-}
-
-.key.wide {
-  width: clamp(56px, 7vw, 84px);
-}
-
-.key.pressed {
+  justify-content: flex-end;
+  gap: 4px;
   background: var(--color-primary);
   color: #fff;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 18px rgba(124, 92, 255, 0.7), 0 1px 0 rgba(0, 0, 0, 0.4);
+  transition: background 0.2s ease;
 }
 
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-.btn {
-  display: inline-block;
-  border: none;
-  padding: 12px 24px;
-  border-radius: var(--radius);
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
-}
-
-.btn-primary {
-  background: var(--color-primary);
-  color: #fff;
-}
-
-.btn-primary:hover {
+.cta-block:hover {
   background: var(--color-primary-hover);
 }
 
-.btn-outline {
-  border: 1.5px solid var(--color-border);
-  color: var(--color-text);
-  background: transparent;
-}
-
-.btn-outline:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+.cta-block .meta {
+  color: rgba(255, 255, 255, 0.75);
 }
 
 /* =========================================================
-   TAB NAVIGATION
+   TOP BAR
    ========================================================= */
+.topbar .cell {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.topbar-tagline {
+  font-size: var(--fs-small);
+  line-height: 1.35;
+  color: var(--color-text-muted);
+}
+
 .tabnav {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--color-border);
-  margin-bottom: 32px;
+  align-items: flex-end;
+  gap: 28px;
 }
 
-.logo {
-  font-weight: 800;
-  font-size: 1.1rem;
-}
-
-.tabnav-links {
-  display: flex;
-  gap: 8px;
-}
-
-.tab-btn {
-  background: transparent;
-  border: none;
+.tabnav .tab-btn {
+  position: relative;
+  font-size: var(--fs-body);
   color: var(--color-text-muted);
-  font-weight: 500;
-  font-size: 0.95rem;
-  padding: 8px 14px;
-  border-radius: 999px;
-  transition: all 0.15s ease;
+  padding-left: 14px;
+  transition: color 0.2s ease;
 }
 
-.tab-btn:hover {
+/* Small square marker before the active tab */
+.tabnav .tab-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: var(--color-primary);
+  transform: translateY(-50%) scale(0);
+  transition: transform 0.25s var(--ease);
+}
+
+.tabnav .tab-btn:hover,
+.tabnav .tab-btn.active {
   color: var(--color-text);
 }
 
-.tab-btn.active {
-  background: var(--color-surface);
-  color: var(--color-text);
+.tabnav .tab-btn.active::before {
+  transform: translateY(-50%) scale(1);
+}
+
+.topbar .cta-block {
+  font-size: var(--fs-body);
+}
+
+/* The Contact block stays solid; a line under it marks it as active */
+.topbar .cta-block.active {
+  box-shadow: inset 0 -3px 0 #fff;
 }
 
 /* =========================================================
@@ -226,195 +221,369 @@ html, body {
    ========================================================= */
 .tab-panels {
   flex: 1;
-  position: relative;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--color-line) transparent; /* Firefox */
+}
+
+.tab-panels::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tab-panels::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+}
+
+.tab-panels::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
 }
 
 .tab-panel {
   display: none;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  max-width: 640px;
-  animation: fadeIn 0.25s ease;
+  min-height: 100%;
 }
 
 .tab-panel.active {
   display: flex;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+/* Cells rise in one after another when a tab opens (--i set by script.js) */
+.tab-panel.active .cell {
+  animation: rise 0.6s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.eyebrow {
-  color: var(--color-primary);
-  font-weight: 600;
-  margin-bottom: 8px;
+/* =========================================================
+   HOME / CONTACT HERO
+   ========================================================= */
+.hero {
+  flex: 1;
 }
 
-.tab-panel h1 {
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-.tab-panel h2 {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  font-weight: 500;
-  color: var(--color-text-muted);
-  margin-bottom: 20px;
-}
-
-.panel-text {
-  color: var(--color-text-muted);
-  margin-bottom: 16px;
-}
-
-.panel-subtitle {
-  color: var(--color-text-muted);
-  margin-bottom: 28px;
-}
-
-.panel-actions {
+.hero-name {
   display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 8px;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
+.display {
+  font-size: var(--fs-display);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+.hero-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.hero-actions .cta-block {
+  min-height: 140px;
+  font-size: var(--fs-lead);
+}
+
+/* =========================================================
+   SECTION HEAD (Projects, About)
+   ========================================================= */
 .section-title {
-  font-size: clamp(1.5rem, 3vw, 1.9rem);
-  font-weight: 800;
-  margin-bottom: 8px;
+  font-size: var(--fs-title);
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 
-.sub-heading {
-  margin-top: 20px;
-  margin-bottom: 12px;
-  font-size: 1rem;
+.section-head-text {
+  display: flex;
+  align-items: flex-end;
+}
+
+.section-head-text .lead {
+  max-width: 44ch;
+  color: var(--color-text-muted);
 }
 
 /* =========================================================
    PROJECTS
    ========================================================= */
-.project-grid {
-  display: grid;
-  gap: 16px;
-  overflow-y: auto;
+.project {
+  transition: background 0.2s ease;
 }
 
-.project-card {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 18px 20px;
+.project:hover {
   background: var(--color-surface);
 }
 
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .tag {
-  display: inline-block;
+  align-self: flex-start;
   font-size: 0.7rem;
-  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
   color: var(--color-primary);
-  background: rgba(124, 92, 255, 0.12);
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-bottom: 10px;
+  border: 1px solid currentColor;
+  border-radius: var(--radius);
+  padding: 3px 8px;
 }
 
-.project-card h3 {
-  font-size: 1.05rem;
-  margin-bottom: 6px;
-}
-
-.project-card p {
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
+.project-body h3 {
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
   margin-bottom: 12px;
 }
 
-.project-links {
-  display: flex;
-  gap: 16px;
-  font-weight: 600;
-  font-size: 0.85rem;
+.project-body p {
+  color: var(--color-text-muted);
+  font-size: var(--fs-body);
+  max-width: 60ch;
 }
 
-.project-links a {
+.project-link {
+  display: flex;
+  align-items: flex-end;
+  font-size: var(--fs-body);
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.project:hover .project-link {
   color: var(--color-primary);
 }
 
 /* =========================================================
    ABOUT
    ========================================================= */
-.skills-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.info-label {
+  font-size: var(--fs-body);
+  color: var(--color-text-muted);
 }
 
-.skills-list li {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  padding: 7px 14px;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 500;
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.entry h4 {
+  font-size: 1.15rem;
+  letter-spacing: -0.015em;
+  margin-bottom: 6px;
+}
+
+.entry p {
+  color: var(--color-text-muted);
+  font-size: var(--fs-body);
+  max-width: 62ch;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chips li {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  font-size: var(--fs-small);
+  transition: border-color 0.2s ease;
+}
+
+.chips li:hover {
+  border-color: var(--color-primary);
 }
 
 /* =========================================================
    CONTACT
    ========================================================= */
-.contact-links {
+.contact-link {
   display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  min-height: 170px;
+  transition: background 0.2s ease;
+}
+
+.contact-link:not(.cta-block):hover {
+  background: var(--color-surface);
+}
+
+.contact-value {
+  font-size: var(--fs-lead);
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
 }
 
 /* =========================================================
    FOOTER
    ========================================================= */
 .footer {
-  padding-top: 16px;
+  border-bottom: none;
+  border-top: 1px solid var(--color-line);
+  margin-top: -1px;
+}
+
+.footer .cell {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: var(--fs-small);
   color: var(--color-text-muted);
-  font-size: 0.8rem;
 }
 
 /* =========================================================
-   RESPONSIVE — on smaller screens, stack and allow scrolling
+   RESPONSIVE — on smaller screens, stack cells and let the
+   page scroll normally
    ========================================================= */
 @media (max-width: 900px) {
-  html, body {
-    height: auto;
-  }
-
   .page {
-    flex-direction: column;
     height: auto;
+    min-height: 100vh;
     overflow: visible;
   }
 
-  .content-col {
-    width: 100%;
+  .tab-panels {
     overflow: visible;
-    padding: 24px;
   }
 
-  .keys-col {
-    width: 100%;
-    height: 45vh;
-    order: -1;
+  .row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cell {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .row > .cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .span-2,
+  .span-3 {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+
+  /* Remove the doubled line under the last cells of each row */
+  .row {
+    border-bottom: none;
+  }
+
+  .topbar .topbar-tagline {
+    grid-column: 1;
+    border-right: 1px solid var(--color-line);
+  }
+
+  .topbar .cta-block {
+    grid-column: 2;
+    grid-row: 1;
+    border-right: none;
   }
 
   .tabnav {
-    flex-wrap: wrap;
-    gap: 12px;
+    grid-column: 1 / -1;
+    border-right: none;
   }
 
-  .tab-panel {
-    max-width: 100%;
-    height: auto;
+  .hero-name,
+  .hero-intro,
+  .section-head > .cell {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+
+  .hero-name {
+    min-height: 40vh;
+  }
+
+  .contact-link,
+  .hero-actions .cta-block {
+    min-height: 120px;
+  }
+
+  /* The empty spacer cell only exists to align the button on desktop */
+  .hero-actions > .cell:first-child {
+    display: none;
+  }
+
+  .hero-actions .cta-block {
+    grid-column: 1 / -1;
+  }
+
+  .project-meta {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .project-meta .index {
+    margin-bottom: 0;
+  }
+
+  .project-body,
+  .project-link,
+  .project-meta,
+  .info-label,
+  .info-content {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+
+  .project-link {
+    min-height: 56px;
+  }
+
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .footer {
+    border-top: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .contact-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-row .cell {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+
+  .tabnav {
+    gap: 20px;
+  }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }

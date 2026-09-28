@@ -4,146 +4,220 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Breno Librelato Manoel</title>
-  <meta name="description" content="Portfolio of Breno Librelato Manoel — academic, coding, and design projects.">
+  <meta name="description" content="Portfolio of Breno Librelato Manoel — IT support, infrastructure, and Information Systems projects.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+  <!-- The whole site is a grid of hairline-bordered cells on a 4-column base.
+       Every row (.row) uses the same 4 columns, so cells line up across rows;
+       .span-2 / .span-3 make a cell wider. -->
   <div class="page">
 
-    <div class="content-col">
-
-      <!-- Splits the site into tabs, so the user never needs to scroll — just switch between tabs -->
-      <nav class="tabnav">
-        <ul class="tabnav-links">
-          <li><button class="tab-btn active" data-tab="home">Home</button></li>
-          <li><button class="tab-btn" data-tab="projects">Projects</button></li>
-          <li><button class="tab-btn" data-tab="about">About</button></li>
-          <li><button class="tab-btn" data-tab="contact">Contact</button></li>
-        </ul>
+    <!-- ===== TOP BAR ===== -->
+    <header class="row topbar">
+      <p class="cell span-2 topbar-tagline">IT support &amp;<br>Information Systems</p>
+      <!-- Tabs: the site never needs page scrolling — just switch between tabs -->
+      <nav class="cell tabnav" aria-label="Sections">
+        <button class="tab-btn active" data-tab="home">Home</button>
+        <button class="tab-btn" data-tab="projects">Projects</button>
+        <button class="tab-btn" data-tab="about">About</button>
       </nav>
+      <button class="cell tab-btn cta-block" data-tab="contact">
+        Contact
+        <span class="arrow" aria-hidden="true">↗</span>
+      </button>
+    </header>
 
-      <div class="tab-panels">
+    <main class="tab-panels">
 
-        <!-- ===== HOME ===== -->
-        <section class="tab-panel active" id="home">
-          <p class="eyebrow">Hi, I'm</p>
-          <h1>Breno Librelato Manoel</h1>
-          <h2>Information Systems Student</h2>
-          <p class="panel-text">
-            Tecnology enthusiast, passionate about software development, infraestructure, and help people.
-            I enjoy learning new technologies and applying them to solve problems.
-          </p>
-        </section>
+      <!-- ===== HOME ===== -->
+      <section class="tab-panel active" id="home">
+        <div class="row hero">
+          <div class="cell span-3 hero-name">
+            <h1 class="display">Breno Librelato<br>Manoel</h1>
+          </div>
+          <div class="cell hero-intro">
+            <p class="lead">
+              Technology enthusiast passionate about software development,
+              infrastructure, and helping people.
+            </p>
+          </div>
+        </div>
 
-        <!-- ===== PROJECTS ===== -->
-        <section class="tab-panel" id="projects">
-          <h2 class="section-title">Projects (Work in Progress)</h2>
-          <p class="panel-subtitle">A selection of the work that best represents what I can do.</p>
+        <div class="row hero-actions">
+          <div class="cell span-3"></div>
+          <button class="cell cta-block" data-tab-link="projects">
+            View projects
+            <span class="arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+      </section>
 
-          <div class="project-grid">
+      <!-- ===== PROJECTS ===== -->
+      <section class="tab-panel" id="projects">
+        <div class="row section-head">
+          <div class="cell span-2">
+            <h2 class="section-title">Projects</h2>
+          </div>
+          <div class="cell span-2 section-head-text">
+            <p class="lead">A selection of the work that best represents what I can do.</p>
+          </div>
+        </div>
 
-            <article class="project-card">
-              <span class="tag">Academic</span>
-              <h3>Recycling Game</h3>
-              <p>Educational game that teaches children about recycling, built with
-                HTML for the Interdisciplinary Extension Project II.</p>
-              <div class="project-links">
-                <a href="https://github.com/brenolibrelato/jogo-reciclagem" target="_blank">Repository →</a>
+        <!-- Each project is a full row. Duplicate an <a class="row project"> to add more. -->
+        <a class="row project" href="https://github.com/brenolibrelato/jogo-reciclagem" target="_blank" rel="noopener">
+          <div class="cell project-meta">
+            <span class="index">01</span>
+            <span class="tag">Academic</span>
+          </div>
+          <div class="cell span-2 project-body">
+            <h3>Recycling Game</h3>
+            <p>Educational game that teaches children about recycling, built with
+              HTML for the Interdisciplinary Extension Project II.</p>
+          </div>
+          <div class="cell project-link">
+            Repository
+            <span class="arrow" aria-hidden="true">↗</span>
+          </div>
+        </a>
+
+        <a class="row project" href="https://github.com/brenolibrelato/configurador-automatico-rede" target="_blank" rel="noopener">
+          <div class="cell project-meta">
+            <span class="index">02</span>
+            <span class="tag">Infrastructure</span>
+          </div>
+          <div class="cell span-2 project-body">
+            <h3>Automatic Network Configurator</h3>
+            <p>Windows installer built with Inno Setup that provisions workstations:
+              installs software, applies policies through the registry, and removes
+              bloatware, with component selection in the setup wizard.</p>
+          </div>
+          <div class="cell project-link">
+            Repository
+            <span class="arrow" aria-hidden="true">↗</span>
+          </div>
+        </a>
+      </section>
+
+      <!-- ===== ABOUT ===== -->
+      <section class="tab-panel" id="about">
+        <div class="row section-head">
+          <div class="cell">
+            <h2 class="section-title">About</h2>
+          </div>
+          <div class="cell span-3 section-head-text">
+            <p class="lead">
+              I'm Breno Librelato Manoel, from Pedras Grandes, Santa Catarina, Brazil.
+              I'm pursuing a Bachelor's degree in Information Systems at Centro Universitário
+              Barriga Verde (Unibave), with graduation expected in December 2027.
+            </p>
+          </div>
+        </div>
+
+        <div class="row info">
+          <h3 class="cell info-label">Experience</h3>
+          <div class="cell span-3 info-content">
+            <article class="entry">
+              <span class="meta">2024 — 2026</span>
+              <div>
+                <h4>IT Trainee · Copobras</h4>
+                <p>2 years of IT experience in computer support and maintenance. Handled
+                  service orders and reactive and predictive maintenance for more than
+                  500 computers, kept the company's hardware and software records, helped
+                  implement new systems and automate processes, and integrated industrial
+                  scales with the company's system.</p>
               </div>
             </article>
-
-            <article class="project-card">
-              <span class="tag">Infrastructure</span>
-              <h3>Automatic Network Configurator</h3>
-              <p>Windows installer built with Inno Setup that provisions workstations:
-                installs software, applies policies through the registry, and removes
-                bloatware, with component selection in the setup wizard.</p>
-              <div class="project-links">
-                <a href="https://github.com/brenolibrelato/configurador-automatico-rede" target="_blank">Repository →</a>
+            <article class="entry">
+              <span class="meta">2020 — 2024</span>
+              <div>
+                <h4>Stock Clerk · Frigorífico Swini</h4>
+                <p>Managed inventory in real time, tracking production dates, expiration
+                  dates, and weights.</p>
               </div>
             </article>
-
-            <!-- Duplicate an <article class="project-card"> above to add more projects -->
-
           </div>
-        </section>
+        </div>
 
-        <!-- ===== ABOUT ===== -->
-        <section class="tab-panel" id="about">
-          <h2 class="section-title">Who I Am</h2>
-          <p class="panel-text">
-            I'm Breno Librelato Manoel, from Pedras Grandes, Santa Catarina, Brazil.
-            I'm pursuing a Bachelor's degree in Information Systems at Centro Universitário
-            Barriga Verde (Unibave), with graduation expected in December 2027.
-          </p>
-          <p class="panel-text">
-            I have 2 years of IT experience in computer support and maintenance. As an IT
-            Trainee at Copobras (2024–2026), I handled service orders and reactive and
-            predictive maintenance for more than 500 computers, kept the company's hardware
-            and software records, helped implement new systems and automate processes,
-            and integrated industrial scales with the company's system.
-          </p>
-          <p class="panel-text">
-            Before IT, I worked as a stock clerk at Frigorífico Swini (2020–2024),
-            managing inventory in real time and tracking production dates, expiration
-            dates, and weights.
-          </p>
-
-          <h3 class="sub-heading">Skills</h3>
-          <ul class="skills-list">
-            <li>Hardware &amp; software troubleshooting</li>
-            <li>Preventive &amp; corrective maintenance</li>
-            <li>User support</li>
-            <li>IT asset management</li>
-            <li>Windows</li>
-            <li>Linux</li>
-            <li>TCP/IP, DNS, DHCP</li>
-            <li>Java</li>
-            <li>Python</li>
-            <li>SQL</li>
-            <li>Microsoft Office</li>
-            <li>English (upper-intermediate)</li>
-          </ul>
-
-          <h3 class="sub-heading">Courses</h3>
-          <ul class="skills-list">
-            <li>Java Programming — Unibave, 2024 (40h)</li>
-            <li>Python Programming — Santander, 2026 (8h)</li>
-          </ul>
-        </section>
-
-        <!-- ===== CONTACT ===== -->
-        <section class="tab-panel" id="contact">
-          <h2 class="section-title">Let's talk (Work in Progress)</h2>
-          <p class="panel-subtitle">I'm open to internship opportunities and projects. Get in touch:</p>
-          <div class="contact-links">
-            <a href="mailto:youremail@example.com" class="btn btn-primary">youremail@example.com</a>
-            <a href="https://linkedin.com/in/your-username" target="_blank" class="btn btn-outline">LinkedIn</a>
-            <a href="https://github.com/your-username" target="_blank" class="btn btn-outline">GitHub</a>
+        <div class="row info">
+          <h3 class="cell info-label">Skills</h3>
+          <div class="cell span-3 info-content">
+            <ul class="chips">
+              <li>Hardware &amp; software troubleshooting</li>
+              <li>Preventive &amp; corrective maintenance</li>
+              <li>User support</li>
+              <li>IT asset management</li>
+              <li>Windows</li>
+              <li>Linux</li>
+              <li>TCP/IP, DNS, DHCP</li>
+              <li>Java</li>
+              <li>Python</li>
+              <li>SQL</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>Microsoft Office</li>
+              <li>English (upper-intermediate)</li>
+            </ul>
           </div>
-        </section>
+        </div>
 
-      </div>
+        <div class="row info">
+          <h3 class="cell info-label">Courses</h3>
+          <div class="cell span-3 info-content">
+            <article class="entry">
+              <span class="meta">2024 · 40h</span>
+              <h4>Java Programming · Unibave</h4>
+            </article>
+            <article class="entry">
+              <span class="meta">2026 · 8h</span>
+              <h4>Python Programming · Santander</h4>
+            </article>
+          </div>
+        </div>
+      </section>
 
-      <footer class="footer">
-        <p>&copy; <span id="year"></span> Breno Librelato Manoel</p>
-      </footer>
-    </div>
+      <!-- ===== CONTACT ===== -->
+      <section class="tab-panel" id="contact">
+        <div class="row hero">
+          <div class="cell span-3 hero-name">
+            <h2 class="display">Let's talk</h2>
+          </div>
+          <div class="cell hero-intro">
+            <p class="lead">I'm open to internship opportunities and projects. Get in touch:</p>
+          </div>
+        </div>
 
-    <!-- ============================================================
-         KEYS COLUMN (1/3 of the screen)
-         Keys are scattered randomly by script.js, with no grid or
-         order. Every 1.5s a random key gets "pressed" (visual effect
-         only). Doesn't depend on any external file.
-         ============================================================ -->
-    <div class="keys-col">
-      <div class="keys-field" id="keysField"></div>
-    </div>
+        <div class="row contact-row">
+          <a class="cell span-2 cta-block contact-link" href="mailto:librelatobreno@gmail.com">
+            <span class="meta">Email</span>
+            <span class="contact-value">librelatobreno@gmail.com</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="cell contact-link" href="https://www.linkedin.com/in/breno-librelato-manoel-b3538435b/" target="_blank" rel="noopener">
+            <span class="meta">LinkedIn</span>
+            <span class="contact-value">Breno Librelato</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="cell contact-link" href="https://github.com/brenolibrelato" target="_blank" rel="noopener">
+            <span class="meta">GitHub</span>
+            <span class="contact-value">brenolibrelato</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="row footer">
+      <p class="cell span-2">&copy; <span id="year"></span> Breno Librelato Manoel</p>
+      <p class="cell span-2">Pedras Grandes, SC — Brazil</p>
+    </footer>
 
   </div>
 
