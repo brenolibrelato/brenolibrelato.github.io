@@ -1,4 +1,18 @@
 /* =========================================================
+   FONT — Inter hosted in this repo (fonts/, SIL OFL license),
+   so visitors' browsers don't contact Google Fonts.
+   One variable-weight file covers both 400 and 500.
+   ========================================================= */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* =========================================================
    VARIABLES — change the colors here to update the whole site
    ========================================================= */
 :root {
@@ -6,8 +20,9 @@
   --color-surface: #14141c;
   --color-text: #f2f2f5;
   --color-text-muted: #9a9aab;
-  --color-primary: #7c5cff;
-  --color-primary-hover: #6a47ff;
+  --color-primary: #6e50f5;       /* fills with white text (5.1:1) */
+  --color-primary-hover: #5d3fe0;
+  --color-primary-text: #9d86ff;  /* accent text on dark backgrounds (6.4:1) */
   --color-line: #2a2a36;
 
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -81,6 +96,7 @@ button {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh; /* excludes mobile browser bars */
   overflow: hidden;
 }
 
@@ -154,7 +170,12 @@ button:hover .arrow {
 }
 
 .cta-block .meta {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.92); /* lowest opacity that keeps 4.5:1 on the purple */
+}
+
+/* A purple outline would vanish on the purple block */
+.cta-block:focus-visible {
+  outline-color: #fff;
 }
 
 /* =========================================================
@@ -332,7 +353,7 @@ button:hover .arrow {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-primary);
+  color: var(--color-primary-text);
   border: 1px solid currentColor;
   border-radius: var(--radius);
   padding: 3px 8px;
@@ -360,7 +381,7 @@ button:hover .arrow {
 }
 
 .project:hover .project-link {
-  color: var(--color-primary);
+  color: var(--color-primary-text);
 }
 
 /* =========================================================
@@ -460,6 +481,7 @@ button:hover .arrow {
   .page {
     height: auto;
     min-height: 100vh;
+    min-height: 100dvh;
     overflow: visible;
   }
 

@@ -3,12 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Security: GitHub Pages can't send HTTP headers, so the policies go here.
+       CSP: only this site's own files may load (no inline scripts, no third
+       parties), which limits the damage of any future XSS. Adding a CDN,
+       analytics, or an embed means allowing its domain below. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <!-- External sites see only "brenolibrelato.github.io", never the full URL -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Breno Librelato Manoel</title>
   <meta name="description" content="Portfolio of Breno Librelato Manoel — IT support, infrastructure, and Information Systems projects.">
+  <meta name="theme-color" content="#0a0a0f">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+  <!-- Link preview on LinkedIn, WhatsApp, etc. (image URLs must be absolute) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://brenolibrelato.github.io/">
+  <meta property="og:title" content="Breno Librelato Manoel — Portfolio">
+  <meta property="og:description" content="IT support, infrastructure, and Information Systems projects.">
+  <meta property="og:image" content="https://brenolibrelato.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Breno Librelato Manoel — IT support & Information Systems">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,16 +42,18 @@
     <!-- ===== TOP BAR ===== -->
     <header class="row topbar">
       <p class="cell span-2 topbar-tagline">IT support &amp;<br>Information Systems</p>
-      <!-- Tabs: the site never needs page scrolling — just switch between tabs -->
+      <!-- Tabs: the site never needs page scrolling — just switch between tabs.
+           They are links to #hash URLs, so each tab can be shared, reloaded
+           and reached with the browser's Back button. -->
       <nav class="cell tabnav" aria-label="Sections">
-        <button class="tab-btn active" data-tab="home">Home</button>
-        <button class="tab-btn" data-tab="projects">Projects</button>
-        <button class="tab-btn" data-tab="about">About</button>
+        <a class="tab-btn active" href="#home" data-tab="home" aria-current="page">Home</a>
+        <a class="tab-btn" href="#projects" data-tab="projects">Projects</a>
+        <a class="tab-btn" href="#about" data-tab="about">About</a>
       </nav>
-      <button class="cell tab-btn cta-block" data-tab="contact">
+      <a class="cell tab-btn cta-block" href="#contact" data-tab="contact">
         Contact
         <span class="arrow" aria-hidden="true">↗</span>
-      </button>
+      </a>
     </header>
 
     <main class="tab-panels">
@@ -51,10 +74,10 @@
 
         <div class="row hero-actions">
           <div class="cell span-3"></div>
-          <button class="cell cta-block" data-tab-link="projects">
+          <a class="cell cta-block" href="#projects">
             View projects
             <span class="arrow" aria-hidden="true">↗</span>
-          </button>
+          </a>
         </div>
       </section>
 
@@ -164,23 +187,36 @@
         <div class="row info">
           <h3 class="cell info-label">Skills</h3>
           <div class="cell span-3 info-content">
-            <ul class="chips">
-              <li>Hardware &amp; software troubleshooting</li>
-              <li>Preventive &amp; corrective maintenance</li>
-              <li>User support</li>
-              <li>IT asset management</li>
-              <li>Windows</li>
-              <li>Linux</li>
-              <li>TCP/IP, DNS, DHCP</li>
-              <li>Java</li>
-              <li>Python</li>
-              <li>SQL</li>
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>JavaScript</li>
-              <li>Microsoft Office</li>
-              <li>English (upper-intermediate)</li>
-            </ul>
+            <div class="entry">
+              <span class="meta">Infrastructure &amp; Support</span>
+              <ul class="chips">
+                <li>Hardware &amp; software troubleshooting</li>
+                <li>Preventive &amp; corrective maintenance</li>
+                <li>User support</li>
+                <li>IT asset management</li>
+                <li>Windows</li>
+                <li>Linux</li>
+                <li>TCP/IP, DNS, DHCP</li>
+              </ul>
+            </div>
+            <div class="entry">
+              <span class="meta">Programming</span>
+              <ul class="chips">
+                <li>Java</li>
+                <li>Python</li>
+                <li>SQL</li>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+              </ul>
+            </div>
+            <div class="entry">
+              <span class="meta">Tools &amp; Languages</span>
+              <ul class="chips">
+                <li>Microsoft Office</li>
+                <li>English (upper-intermediate)</li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -190,10 +226,6 @@
             <article class="entry">
               <span class="meta">2024 · 40h</span>
               <h4>Java Programming · Unibave</h4>
-            </article>
-            <article class="entry">
-              <span class="meta">2026 · 8h</span>
-              <h4>Python Programming · Santander</h4>
             </article>
           </div>
         </div>
