@@ -186,12 +186,6 @@ button:hover .arrow {
   padding-bottom: 18px;
 }
 
-.topbar-tagline {
-  font-size: var(--fs-small);
-  line-height: 1.35;
-  color: var(--color-text-muted);
-}
-
 .tabnav {
   display: flex;
   align-items: flex-end;
@@ -230,6 +224,11 @@ button:hover .arrow {
 
 .topbar .cta-block {
   font-size: var(--fs-body);
+}
+
+/* Single-line bar: keep the ↗ level with the "Contact" text */
+.topbar .arrow {
+  top: 18px;
 }
 
 /* The Contact block stays solid; a line under it marks it as active */
@@ -507,20 +506,19 @@ button:hover .arrow {
     border-bottom: none;
   }
 
-  .topbar .topbar-tagline {
+  /* Tabs and Contact share one line: tabs take the space, Contact fits its text */
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .topbar .tabnav {
     grid-column: 1;
     border-right: 1px solid var(--color-line);
   }
 
   .topbar .cta-block {
     grid-column: 2;
-    grid-row: 1;
-    border-right: none;
-  }
-
-  .tabnav {
-    grid-column: 1 / -1;
-    border-right: none;
+    padding-right: calc(var(--cell-pad) * 2);
   }
 
   .hero-name,
@@ -592,6 +590,21 @@ button:hover .arrow {
 
   .tabnav {
     gap: 20px;
+  }
+}
+
+/* Too narrow for tabs and Contact side by side: stack them */
+@media (max-width: 380px) {
+  .topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar .tabnav {
+    border-right: none;
+  }
+
+  .topbar .cta-block {
+    grid-column: 1;
   }
 }
 
