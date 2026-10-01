@@ -71,3 +71,68 @@ window.addEventListener('load', () => window.scrollTo(0, 0));
 
 // Updates the year in the footer automatically
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Home intro: types a phrase letter by letter, erases it with "backspace"
+// and types the next one, in a loop. Edit the phrases here.
+const typewriterPhrases = [
+  'Technology enthusiast, driven by discovery, always learning.',
+  'I like understanding how things work, and making them work better.',
+  'Curious by default. Always tinkering.',
+  'Always one more tab open, one more thing to learn.',
+  "I like technology best when it makes someone's day easier.",
+  'Building the future, one commit at a time.',
+];
+
+const typewriter = document.querySelector('.typewriter');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (typewriter && !reduceMotion) {
+  const span = (className, text = '') => {
+    const el = document.createElement('span');
+    el.className = className;
+    el.textContent = text;
+    return el;
+  };
+
+  // Screen readers get one calm sentence instead of letters changing
+  const spoken = span('visually-hidden', typewriterPhrases[0]);
+  // Invisible copies of every phrase hold the cell at the tallest height
+  const sizers = typewriterPhrases.map((phrase) => {
+    const sizer = span('typewriter-sizer', phrase);
+    sizer.setAttribute('aria-hidden', 'true');
+    return sizer;
+  });
+  const line = span('typewriter-line');
+  line.setAttribute('aria-hidden', 'true');
+  const text = span('typewriter-text');
+  line.append(text, span('typewriter-caret'));
+
+  typewriter.replaceChildren(spoken, ...sizers, line);
+  typewriter.classList.add('is-ready');
+
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  // Small random variation so it feels like a person typing
+  const jitter = (base) => base + Math.random() * base * 0.8;
+
+  (async () => {
+    for (let i = 0; ; i = (i + 1) % typewriterPhrases.length) {
+      const phrase = typewriterPhrases[i];
+
+      typewriter.classList.add('is-typing');
+      for (let n = 1; n <= phrase.length; n++) {
+        text.textContent = phrase.slice(0, n);
+        await wait(jitter(45));
+      }
+      typewriter.classList.remove('is-typing');
+      await wait(2200);
+
+      typewriter.classList.add('is-typing');
+      for (let n = phrase.length - 1; n >= 0; n--) {
+        text.textContent = phrase.slice(0, n);
+        await wait(28);
+      }
+      typewriter.classList.remove('is-typing');
+      await wait(500);
+    }
+  })();
+}

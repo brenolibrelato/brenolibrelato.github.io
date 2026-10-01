@@ -312,6 +312,50 @@ button:hover .arrow {
   font-size: var(--fs-lead);
 }
 
+/* Typing text next to the name. Every phrase sits invisibly in the same
+   grid spot, so the cell is always as tall as the longest one and the
+   layout never jumps while letters come and go. */
+.typewriter.is-ready {
+  display: grid;
+}
+
+.typewriter.is-ready > span {
+  grid-area: 1 / 1;
+}
+
+.typewriter-sizer {
+  visibility: hidden;
+}
+
+/* Blinking text cursor; it stays solid while typing, like a real one */
+.typewriter-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  background: var(--color-primary);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+.typewriter.is-typing .typewriter-caret {
+  animation: none;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+/* Read by screen readers, hidden on screen */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* =========================================================
    SECTION HEAD (Projects, About)
    ========================================================= */
