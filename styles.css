@@ -20,9 +20,10 @@
   --color-surface: #14141c;
   --color-text: #f2f2f5;
   --color-text-muted: #9a9aab;
-  --color-primary: #6e50f5;       /* fills with white text (5.1:1) */
-  --color-primary-hover: #5d3fe0;
-  --color-primary-text: #9d86ff;  /* accent text on dark backgrounds (6.4:1) */
+  --color-primary: #8cb81a;       /* lime accent: 8.5:1 on the background */
+  --color-primary-hover: #7aa314;
+  --color-primary-text: #8cb81a;  /* accent text on dark backgrounds (8.5:1) */
+  --color-on-primary: #0a0a0f;    /* text on lime fills (8.5:1) */
   --color-line: #2a2a36;
 
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -161,7 +162,7 @@ button:hover .arrow {
   justify-content: flex-end;
   gap: 4px;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   transition: background 0.2s ease;
 }
 
@@ -170,12 +171,12 @@ button:hover .arrow {
 }
 
 .cta-block .meta {
-  color: rgba(255, 255, 255, 0.92); /* lowest opacity that keeps 4.5:1 on the purple */
+  color: var(--color-on-primary);
 }
 
-/* A purple outline would vanish on the purple block */
+/* A lime outline would vanish on the lime block */
 .cta-block:focus-visible {
-  outline-color: #fff;
+  outline-color: var(--color-on-primary);
 }
 
 /* =========================================================
@@ -233,7 +234,7 @@ button:hover .arrow {
 
 /* The Contact block stays solid; a line under it marks it as active */
 .topbar .cta-block.active {
-  box-shadow: inset 0 -3px 0 #fff;
+  box-shadow: inset 0 -3px 0 var(--color-on-primary);
 }
 
 /* =========================================================

@@ -18,7 +18,7 @@ reproduza layouts, textos, imagens ou identidade de sites premiados.
 - HTML, CSS e JavaScript puros, sem build e sem framework. Publicado no GitHub Pages.
 - Cores, fonte e raio sempre pelas variáveis em `:root` no `styles.css`. Nova cor
   vira nova variável; nunca valores soltos no meio do CSS.
-- Identidade atual: tema escuro, destaque roxo `--color-primary` (#7c5cff), fonte Inter,
+- Identidade atual: tema escuro, destaque lima `--color-primary` (#8cb81a, texto escuro `--color-on-primary` sobre ele), fonte Inter,
   navegação por abas sem scroll. Evolua essa identidade; não troque por outra sem o
   Breno pedir.
 
@@ -32,7 +32,7 @@ O layout segue a *estrutura* do Sincro, adaptada ao tema escuro:
 - **Um só peso de fonte (400)**: hierarquia só por tamanho (`--fs-display`, `--fs-title`,
   `--fs-lead`, `--fs-body`, `--fs-small`). Nada de negrito.
   Tipos grandes com `letter-spacing` negativo.
-- **Blocos sólidos de destaque** (`.cta-block`) em roxo, com seta `↗` no canto superior
+- **Blocos sólidos de destaque** (`.cta-block`) em lima, com seta `↗` no canto superior
   direito, para as ações principais.
 - Índices pequenos (`.index`: 01, 02…) só na lista de projetos; o Breno não quer
   números nas seções nem faixa de estatísticas na Home.
